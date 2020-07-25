@@ -4,7 +4,14 @@ A dropdown button Widget allowing one to choose multiple elements.
 
 ## Install
 
-*Not on pub yet*
+Add these line under your dependencies section:
+
+```yaml
+    multiselect_form_field:
+        git:
+            url: https://github.com/stevenosse/multi_select_form_field.git
+            ref: master
+```
 
 ## Demo
 
