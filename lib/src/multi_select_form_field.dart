@@ -44,9 +44,11 @@ class MultiSelectFormField extends StatefulWidget {
 }
 
 class MultiSelectFormFieldState extends State<MultiSelectFormField> {
+  /// Retrieve the list of selected elements
   get selectedElements =>
       widget.elementList.where((e) => e['isSelected'] == true).toList();
 
+  /// Retrieve the list of unselected elements
   get unselectedElements =>
       widget.elementList.where((e) => e['isSelected'] == false).toList();
 
