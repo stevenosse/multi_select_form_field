@@ -23,7 +23,10 @@ class MultiSelectTag extends StatelessWidget {
             children: <Widget>[
               Text(
                 "$label",
-                style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               SizedBox(width: 10),
               GestureDetector(

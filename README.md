@@ -19,11 +19,10 @@ A dropdown button Widget allowing one to choose multiple elements.
 MultiSelectField(
     key: _multiSelectKey,
     tagColor: Colors.yellow,
-    listItemBuilder: (BuildContext context, int index) {
-       final item = widget.elementList[index];
+    listItemBuilder: (Map<String, dynamic> item) {
        return MultiSelectFieldListItem(
         onSelected: () {
-            widget.elementList[index]['isSelected'] = true;
+            item = true;
             setState(() {});
         },
         label: item['display'],
