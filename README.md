@@ -10,6 +10,7 @@ A dropdown button Widget allowing one to choose multiple elements.
 - Regular widget
 - Very simple to implement
 - Can retrieve the list of selected elements
+- Build custom list elements
 - Can retrieve the list of unselected elements
 
 ### Example
@@ -18,6 +19,17 @@ A dropdown button Widget allowing one to choose multiple elements.
 MultiSelectField(
     key: _multiSelectKey,
     tagColor: Colors.yellow,
+    listItemBuilder: (BuildContext context, int index) {
+       final item = widget.elementList[index];
+       return MultiSelectFieldListItem(
+        onSelected: () {
+            widget.elementList[index]['isSelected'] = true;
+            setState(() {});
+        },
+        label: item['display'],
+        selected: item['isSelected'],
+      );
+    },
     elementList: [
         {
             'display': "John Doe",

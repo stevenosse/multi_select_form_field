@@ -7,12 +7,14 @@ class MultiSelectFormField extends StatefulWidget {
   final List<Map<String, dynamic>> elementList;
   final Color tagColor;
   final String emptyLabel;
+  final MultiSelectFieldListItem Function(BuildContext, int) listItemBuilder;
 
   MultiSelectFormField({
     this.key,
     @required this.elementList,
     this.emptyLabel,
     this.tagColor,
+    @required this.listItemBuilder,
   }) : super(key: key) {
     assert(this.elementList.length >= 2);
   }
@@ -52,17 +54,7 @@ class MultiSelectFormFieldState extends State<MultiSelectFormField> {
               padding: EdgeInsets.only(top: 55.0, left: 12.0, right: 12.0),
               child: ListView.builder(
                 itemCount: widget.elementList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  final item = widget.elementList[index];
-                  return MultiSelectFieldListItem(
-                    onSelected: () {
-                      widget.elementList[index]['isSelected'] = true;
-                      setState(() {});
-                    },
-                    label: item['display'],
-                    selected: item['isSelected'],
-                  );
-                },
+                itemBuilder: widget.listItemBuilder
               ),
             ),
           ),
