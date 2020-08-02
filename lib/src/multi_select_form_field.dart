@@ -26,20 +26,13 @@ class MultiSelectFormField extends StatefulWidget {
   /// The default text is ["No item selected yet"]
   final String emptyLabel;
 
-  /// The List of elements builder method
-  ///
-  /// Can't be null
-  final MultiSelectFieldListItem Function(MultiSelectFormFieldItem)
-      listItemBuilder;
-
   MultiSelectFormField({
     this.key,
     @required this.elementList,
     this.emptyLabel,
     this.tagColor,
-    @required this.listItemBuilder,
   }) : super(key: key) {
-    assert(this.elementList.length >= 2 && listItemBuilder != null);
+    assert(this.elementList.length >= 2);
   }
 
   @override
