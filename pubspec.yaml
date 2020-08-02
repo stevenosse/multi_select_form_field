@@ -1,6 +1,6 @@
 name: multiselect_form_field
-description: A new Flutter project.
-version: 0.0.1
+description: A flutter dropdown button Widget allowing one to choose multiple elements.
+version: 0.0.2
 author:
 homepage:
 
