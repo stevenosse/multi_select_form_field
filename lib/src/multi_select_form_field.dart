@@ -78,21 +78,47 @@ class MultiSelectFormFieldState extends State<MultiSelectFormField> {
             child: Padding(
               padding: EdgeInsets.only(top: 55.0, left: 12.0, right: 12.0),
               child: ListView.builder(
-                  itemCount: widget.elementList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: () {
-                          print("tapped");
-                          setState(() {
-                            widget.elementList[index].isSelected = true;
-                          });
-                        },
-                        child: widget.listItemBuilder(widget.elementList[index]),
+                itemCount: widget.elementList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final element = widget.elementList[index];
+                  return Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          widget.elementList[index].isSelected = true;
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: <Widget>[
+                            if (element.leading != null) ...[
+                              element.leading,
+                              SizedBox(width: 5)
+                            ],
+                            if (element.label != null)
+                              Expanded(
+                                child: Text(
+                                  element.label,
+                                  style: element.labelStyle.apply(
+                                    color: element.isSelected
+                                        ? Colors.black45
+                                        : element.labelStyle.color,
+                                  ),
+                                ),
+                              ),
+                            if (element.trailing != null) ...[
+                              SizedBox(width: 5),
+                              element.trailing,
+                            ],
+                          ],
+                        ),
                       ),
-                    );
-                  }),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           _buildSelectedList(),
