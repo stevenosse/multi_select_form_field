@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:multiselect_form_field/src/multi_select_field_list_item.dart';
+import 'package:multiselect_form_field/src/multi_select_form_field_list_item.dart';
+import 'package:multiselect_form_field/src/multi_select_form_field_item.dart';
 import 'package:multiselect_form_field/src/multi_select_tag.dart';
 
 class MultiSelectFormField extends StatefulWidget {
   final Key key;
+
   /// The list of elements to display
   ///
   /// The element's map structure is :
@@ -12,7 +14,7 @@ class MultiSelectFormField extends StatefulWidget {
   ///   'value': value,
   ///   'isSelected': false
   /// }
-  final List<Map<String, dynamic>> elementList;
+  final List<MultiSelectFormFieldItem> elementList;
 
   /// The color of the displayed tag color
   ///
@@ -27,7 +29,8 @@ class MultiSelectFormField extends StatefulWidget {
   /// The List of elements builder method
   ///
   /// Can't be null
-  final MultiSelectFieldListItem Function(Map<String, dynamic>) listItemBuilder;
+  final MultiSelectFieldListItem Function(MultiSelectFormFieldItem)
+      listItemBuilder;
 
   MultiSelectFormField({
     this.key,
@@ -46,11 +49,11 @@ class MultiSelectFormField extends StatefulWidget {
 class MultiSelectFormFieldState extends State<MultiSelectFormField> {
   /// Retrieve the list of selected elements
   get selectedElements =>
-      widget.elementList.where((e) => e['isSelected'] == true).toList();
+      widget.elementList.where((e) => e.isSelected == true).toList();
 
   /// Retrieve the list of unselected elements
   get unselectedElements =>
-      widget.elementList.where((e) => e['isSelected'] == false).toList();
+      widget.elementList.where((e) => e.isSelected == false).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +78,17 @@ class MultiSelectFormFieldState extends State<MultiSelectFormField> {
             child: Padding(
               padding: EdgeInsets.only(top: 55.0, left: 12.0, right: 12.0),
               child: ListView.builder(
-                itemCount: widget.elementList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return widget.listItemBuilder(widget.elementList[index]);
-                }
-              ),
+                  itemCount: widget.elementList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          widget.elementList[index].isSelected = true;
+                        });
+                      },
+                      child: widget.listItemBuilder(widget.elementList[index]),
+                    );
+                  }),
             ),
           ),
           _buildSelectedList(),
@@ -104,10 +113,13 @@ class MultiSelectFormFieldState extends State<MultiSelectFormField> {
       ),
       child: Padding(
         padding: EdgeInsets.all(4.0),
-        child: Wrap(
-          children: <Widget>[
-            ..._buildSelectedElementList(),
-          ],
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: <Widget>[
+              ..._buildSelectedElementList(),
+            ],
+          ),
         ),
       ),
     );
@@ -115,15 +127,15 @@ class MultiSelectFormFieldState extends State<MultiSelectFormField> {
 
   _buildSelectedElementList() {
     final elementList =
-        widget.elementList.where((e) => e['isSelected'] == true).toList();
+        widget.elementList.where((e) => e.isSelected == true).toList();
     if (elementList.isEmpty) return [_buildEmptyLabel()];
     return elementList
         .map(
           (e) => MultiSelectTag(
-            label: e['display'],
+            label: e.label,
             tagColor: widget.tagColor,
             onRemove: () {
-              widget.elementList.where((elt) => elt == e).first['isSelected'] =
+              widget.elementList.where((elt) => elt == e).first.isSelected =
                   false;
               setState(() {});
             },
