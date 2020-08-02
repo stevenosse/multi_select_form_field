@@ -28,18 +28,18 @@ Add these line under your dependencies section:
 
 ```dart
 MultiSelectFormField(
-  key: _multiSelectKey,
-  tagColor: Env.lightBlue,
-  elementList: List.generate(
-    15,
-    (index) => MultiSelectFormFieldItem(
-      labelStyle: TextStyle(fontWeight: FontWeight.w600),
-      leading: CircleAvatar(),
-      label: "Test $index",
-      value: "test",
-      isSelected: index.isEven,
+    key: _multiSelectKey,
+    tagColor: Colors.blue,
+    elementList: List.generate(
+        15,
+        (index) => MultiSelectFormFieldItem(
+            labelStyle: TextStyle(fontWeight: FontWeight.w600),
+            leading: CircleAvatar(),
+            label: "Test $index",
+            value: "test",
+            isSelected: index.isEven,
+        ),
     ),
-  ),
 ),
 ```
 
