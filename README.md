@@ -27,37 +27,20 @@ Add these line under your dependencies section:
 ### Example
 
 ```dart
-MultiSelectField(
+MultiSelectFormField(
     key: _multiSelectKey,
-    tagColor: Colors.yellow,
-    listItemBuilder: (Map<String, dynamic> item) {
-       return MultiSelectFieldListItem(
-        onSelected: () {
-            item = true;
-            setState(() {});
-        },
-        label: item['display'],
-        selected: item['isSelected'],
-      );
-    },
-    elementList: [
-        {
-            'display': "John Doe",
-            'isSelected': true,
-            'value': 1
-        },
-        {
-            'display': "Jane Doe",
-            'isSelected': false,
-            'value': 2
-        },
-        {
-            'display': "Tim Cook",
-            'isSelected': false,
-            'value': 3
-        },
-    ],  
-)
+    tagColor: Colors.blue,
+    elementList: List.generate(
+        15,
+        (index) => MultiSelectFormFieldItem(
+            labelStyle: TextStyle(fontWeight: FontWeight.w600),
+            leading: CircleAvatar(),
+            label: "Test $index",
+            value: "test",
+            isSelected: index.isEven,
+        ),
+    ),
+),
 ```
 
 
