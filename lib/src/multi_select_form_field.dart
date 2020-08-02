@@ -80,13 +80,17 @@ class MultiSelectFormFieldState extends State<MultiSelectFormField> {
               child: ListView.builder(
                   itemCount: widget.elementList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          widget.elementList[index].isSelected = true;
-                        });
-                      },
-                      child: widget.listItemBuilder(widget.elementList[index]),
+                    return Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          print("tapped");
+                          setState(() {
+                            widget.elementList[index].isSelected = true;
+                          });
+                        },
+                        child: widget.listItemBuilder(widget.elementList[index]),
+                      ),
                     );
                   }),
             ),

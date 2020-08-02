@@ -33,28 +33,20 @@ class MultiSelectFieldListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: () {
-          if (selected == false) onSelected();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6.0),
-          child: Row(
-            children: <Widget>[
-              if(leading != null) CircleAvatar(),
-              SizedBox(width: 10),
-              Text(
-                "$label",
-                style: labelStyle ?? TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: selected ? Colors.black38 : Colors.black,
-                ),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      child: Row(
+        children: <Widget>[
+          if(leading != null) CircleAvatar(),
+          SizedBox(width: 10),
+          Text(
+            "$label",
+            style: labelStyle ?? TextStyle(
+              fontWeight: FontWeight.w600,
+              color: selected ? Colors.black38 : Colors.black,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
