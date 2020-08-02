@@ -8,12 +8,6 @@ class MultiSelectFormField extends StatefulWidget {
 
   /// The list of elements to display
   ///
-  /// The element's map structure is :
-  /// {
-  ///   'display': value,
-  ///   'value': value,
-  ///   'isSelected': false
-  /// }
   final List<MultiSelectFormFieldItem> elementList;
 
   /// The color of the displayed tag color
@@ -31,9 +25,7 @@ class MultiSelectFormField extends StatefulWidget {
     @required this.elementList,
     this.emptyLabel,
     this.tagColor,
-  }) : super(key: key) {
-    assert(this.elementList.length >= 2);
-  }
+  }) : super(key: key);
 
   @override
   MultiSelectFormFieldState createState() => MultiSelectFormFieldState();
